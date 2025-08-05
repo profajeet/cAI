@@ -1,0 +1,113 @@
+# Agentic AI Orchestration - Example Configuration
+# Copy this file to config/settings.yaml and customize as needed
+
+# Application settings
+app_name: "Agentic AI Orchestration"
+version: "1.0.0"
+debug: false
+
+# AI Configuration
+ai:
+  provider: "openai"
+  model: "gpt-4"
+  api_key: "${OPENAI_API_KEY}"  # Set this environment variable
+  temperature: 0.7
+  max_tokens: 4000
+  timeout: 60
+
+# Database Configuration
+database:
+  url: "sqlite:///./agentic.db"
+  echo: false
+  pool_size: 10
+  max_overflow: 20
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null  # Set to a file path to enable file logging
+  max_size: 10485760  # 10MB
+  backup_count: 5
+
+# Security Configuration
+security:
+  secret_key: "${SECRET_KEY}"  # Set this environment variable or it will be auto-generated
+  algorithm: "HS256"
+  access_token_expire_minutes: 30
+  session_timeout: 3600
+
+# MCP Server Configurations
+mcp_servers:
+  filesystem_server:
+    name: "filesystem_server"
+    host: "localhost"
+    port: 8001
+    protocol: "http"
+    auth_token: null
+    timeout: 30
+    max_retries: 3
+    enabled: true
+  
+  database_server:
+    name: "database_server"
+    host: "localhost"
+    port: 8002
+    protocol: "http"
+    auth_token: null
+    timeout: 30
+    max_retries: 3
+    enabled: true
+  
+  api_server:
+    name: "api_server"
+    host: "localhost"
+    port: 8003
+    protocol: "http"
+    auth_token: null
+    timeout: 30
+    max_retries: 3
+    enabled: true
+
+# Tool Configurations
+tools:
+  filesystem:
+    root_path: "/data"
+    allowed_extensions: [".txt", ".csv", ".json", ".xml"]
+    max_file_size: 10485760  # 10MB
+  
+  database:
+    postgresql:
+      host: "localhost"
+      port: 5432
+      database: "analytics"
+      username: "${DB_USERNAME}"
+      password: "${DB_PASSWORD}"
+    
+    mysql:
+      host: "localhost"
+      port: 3306
+      database: "analytics"
+      username: "${DB_USERNAME}"
+      password: "${DB_PASSWORD}"
+  
+  api_client:
+    timeout: 30
+    max_retries: 3
+    rate_limit: 100  # requests per minute
+
+# Session Configuration
+session_storage: "sqlite"
+session_cleanup_interval: 3600  # 1 hour
+
+# Workflow Configuration
+workflow_storage: "sqlite"
+workflow_retention_days: 30
+
+# Validation Configuration
+validation_enabled: true
+verification_enabled: true
+
+# Performance Configuration
+max_concurrent_requests: 10
+request_timeout: 300  # 5 minutes 

@@ -1,0 +1,73 @@
+# Agent Configuration
+agent:
+  name: "ServiceAgent"
+  model: "gpt-4"
+  temperature: 0.1
+  max_tokens: 2000
+
+# Tool Extensions Configuration
+tool_extensions:
+  enabled: true
+  tools:
+    web_search:
+      enabled: true
+      provider: "serpapi"
+      api_key: "${SERPAPI_API_KEY}"
+    
+    file_operations:
+      enabled: true
+      allowed_extensions: [".txt", ".md", ".py", ".json", ".yaml", ".yml"]
+      max_file_size_mb: 10
+    
+    calculator:
+      enabled: true
+    
+    weather:
+      enabled: false
+      provider: "openweathermap"
+      api_key: "${OPENWEATHER_API_KEY}"
+    
+    database:
+      enabled: false
+      connection_string: "${DATABASE_URL}"
+
+# MCP Extensions Configuration
+mcp_extensions:
+  enabled: true
+  servers:
+    filesystem:
+      enabled: true
+      path: "./workspace"
+    
+    github:
+      enabled: false
+      token: "${GITHUB_TOKEN}"
+      repositories: []
+    
+    docker:
+      enabled: false
+      socket_path: "/var/run/docker.sock"
+    
+    kubernetes:
+      enabled: false
+      config_path: "~/.kube/config"
+
+# Agent Behavior Configuration
+behavior:
+  max_iterations: 10
+  timeout_seconds: 300
+  enable_memory: true
+  memory_type: "conversation_buffer"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/agent.log"
+  
+# API Configuration
+api:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"] 

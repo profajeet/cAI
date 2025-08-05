@@ -1,0 +1,22 @@
+{
+  "database_type": "postgresql",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "your_password_here",
+  "database_name": "testdb",
+  "ssl_mode": "prefer",
+  "operations": [
+    {
+      "type": "list_tables"
+    },
+    {
+      "type": "query",
+      "query": "SELECT version()"
+    },
+    {
+      "type": "query",
+      "query": "SELECT current_database(), current_user"
+    }
+  ]
+} 
